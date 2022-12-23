@@ -1,5 +1,7 @@
 package hellojpa;
 
+import javassist.bytecode.stackmap.BasicBlock;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,13 +15,21 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();
-        member.setId(1L);
-        member.setName("helloA");
-        em.persist(member);
 
-        tx.commit();
-        em.close();
+        try{
+            member.setId(2L);
+            member.setName("helloB");
+            em.persist(member);
+
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+        }finally {
+            em.close();
+        }
         emf.close();
+
+
 
     }
 }
