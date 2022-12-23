@@ -2,14 +2,24 @@
 <persistence version="2.2"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <persistence-unit name="hello">
+    <persistence-unit name="hello"><!--  데이터베이스 이름      -->
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/><!--  데이터베이스  종류 -->
+            <!--
+                JPA는 특정 데이터베이스에 종속 X
+                - MYSQL VARCHAR ORACLE VARCHAR2
+                - MYSQL LIMIT ORACLE ROWNUM
+                H2 : org.hibernate.dialect.H2Dialect
+                Oracle 10g : org.hibernate.dialect.Oracle10gDialect
+                MySQL : org.hibernate.dialect.MySQL5InnoDBDialect
+                등... 40가지 이상의 데이터베이스 방언 지원
+
+            -->
 
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
