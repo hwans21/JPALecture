@@ -23,8 +23,13 @@ public class JpaMain {
 
             // 영속
             System.out.println("=== Before ===");
-            em.persist(member);
+            em.persist(member); // >> 1차캐시 저장
             System.out.println("=== After ===");
+
+            Member findMember = em.find(Member.class, 101L);
+
+            System.out.println("findMember.id = "+ findMember.getId());
+            System.out.println("findMember.name = "+ findMember.getName());
 
             tx.commit();
         }catch (Exception e){
