@@ -36,3 +36,4 @@ em.persist(member);
 - 트랜잭션을 지원하는 쓰기 지연(transactional write-behind)
 - 변경 감지(Dirty Checking)
 - 지연 로딩(Lazy Loading)
+
