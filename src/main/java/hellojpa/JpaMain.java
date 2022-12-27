@@ -1,12 +1,10 @@
 package hellojpa;
 
-import javassist.bytecode.stackmap.BasicBlock;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -18,14 +16,17 @@ public class JpaMain {
 
         try{
 //
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
+            // 비영속
+            Member member = new Member();
+            member.setId(101L);
+            member.setName("HelloJPA");
 
-            for(Member member : result ){
-                System.out.println("member = "+member.getId()+":"+member.getName());
-            }
+            // 영속
+            System.out.println("=== Before ===");
+            em.persist(member);
+            System.out.println("=== After ===");
+
+            tx.commit();
         }catch (Exception e){
             tx.rollback();
         }finally {
